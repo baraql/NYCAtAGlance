@@ -6,21 +6,23 @@ import datetime
 
 class Sun:
 
-    def getSunriseTime(self, coords):
-        return self.calcSunTime(coords, True)
+    def getSunriseTime(self, date, coords):
+        return self.calcSunTime(coords, date, True)
 
-    def getSunsetTime(self, coords):
-        return self.calcSunTime(coords, False)
+    def getSunsetTime(self, date, coords):
+        return self.calcSunTime(coords, date, False)
 
     def getCurrentUTC(self):
         now = datetime.datetime.now()
         return [now.day, now.month, now.year]
 
-    def calcSunTime(self, coords, isRiseTime, zenith=90.8):
+    def calcSunTime(self, coords, date, isRiseTime, zenith=90.8):
 
         # isRiseTime == False, returns sunsetTime
 
-        day, month, year = self.getCurrentUTC()
+        # day, month, year = self.getCurrentUTC()
+        print(date)
+        day, month, year = date[0], date[1], date[2]
 
         longitude = coords['longitude']
         latitude = coords['latitude']
