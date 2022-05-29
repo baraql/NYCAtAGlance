@@ -39,13 +39,13 @@ class SubwayWidget(Frame):
         self.iconLabel.image = self.icon
 
         self.label = Label(self, text="__town", anchor="center",
-                           font=('calibri', 40, 'bold'),
+                           font=('calibri', 32, 'bold'),
                            #    background='black',
                            foreground='black')
         self.label.pack(side="left")
 
         self.time = Label(self, text="... min", anchor="e",
-                          font=('calibri', 40, 'bold'),
+                          font=('calibri', 32, 'bold'),
                           #    background='black',
                           foreground='black')
         self.time.pack(side="right")
