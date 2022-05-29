@@ -7,6 +7,6 @@ A display to check in the morning with all the information you'll need for the d
 -> Clock<br>
 
 <p align="center">
-  <video src="projectVideo.MP4" width="350">
-  <img src="projectPhoto.JPG" width="350" alt="project photo">
+  <img src="projectPhoto.JPG" width="350" alt="project photo"></img>
+  <video src="projectVideo.MP4" width="350"></video> 
 </p>
