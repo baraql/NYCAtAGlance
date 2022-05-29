@@ -8,5 +8,5 @@ A display to check in the morning with all the information you'll need for the d
 
 <p align="center">
   <img src="projectPhoto.JPG" width="350" alt="project photo"></img>
-  <video src="projectVideo.MP4" width="350"></video> 
+  <img src="projectGif.gif" width="40" height="40" />
 </p>
