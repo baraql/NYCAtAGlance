@@ -3,9 +3,9 @@ A display to check in the morning with all the information you'll need for the d
 
 ## This includes:<br>
 -> Live 6-hour weather forecast powered by tomorrow.io<br>
-    -> "Feels like" temperature (color coordinated too)
-    -> UV Index
-    -> Sky conditions and icons
+    -> "Feels like" temperature (color coordinated too)<br>
+    -> UV Index<br>
+    -> Sky conditions and icons<br>
 -> Live subway data powered by the MTA API<br>
 -> Clock<br>
 
