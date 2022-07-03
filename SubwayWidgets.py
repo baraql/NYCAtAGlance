@@ -68,7 +68,7 @@ class SubwayWidgets:
     LABEL_UPDATE_INTERVAL = 5
     SUBWAY_DISPLAY_BOXES = 4
 
-    TIMEZONE_OFFSET = -3
+    #TIMEZONE_OFFSET = 0
 
     def __init__(self, root):
         self.listOfTrains = []
@@ -79,12 +79,13 @@ class SubwayWidgets:
         self.organizeSubwayLabels()
 
     def organizeSubwayLabels(self):
-        now = datetime.now() - timedelta(hours=SubwayWidgets.TIMEZONE_OFFSET)
+        now = datetime.now() #- timedelta(hours=SubwayWidgets.TIMEZONE_OFFSET)
 
         for i in range(min(len(self.listOfTrains),
                            SubwayWidgets.SUBWAY_DISPLAY_BOXES)):
             # Remove old trains
             # if (listOfTrains[i].time.replace(tzinfo=None) - now).days < 0:
+            print("line 88... i == " + str(i))
             if self.listOfTrains[i].time.replace(tzinfo=None) < now:
                 del self.listOfTrains[i]
                 continue

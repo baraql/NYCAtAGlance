@@ -6,7 +6,7 @@ import requests
 from Sun import Sun
 from PIL import ImageTk, Image
 import colorsys
-
+from os.path import exists
 
 class WeatherWidget(Frame):
     def __init__(self, parent):
@@ -196,14 +196,23 @@ class WeatherWidgets:
         return False
 
     def getWeatherCodeImage(code, time):
-        return Image.open(
-            ("assets/weather/" +
-             str(code) +
-                str("0" if WeatherWidgets.isTheSunUp(time) else "1") +
-                ".png")).resize(
-            (30,
-             30),
-            Image.LANCZOS)
+        if not WeatherWidgets.isTheSunUp(time) and exists("assets/weather/" + str(code) + "1.png"):
+            return Image.open(
+                ("assets/weather/" +
+                 str(code) +
+                 "1.png")).resize(
+                (30,
+                 30),
+                Image.LANCZOS)
+        else:
+            return Image.open(
+                ("assets/weather/" +
+                 str(code) +
+                 "0.png")).resize(
+                (30,
+                 30),
+                Image.LANCZOS)
+
 
     def hslToHex(h, s, l):
         r, g, b = [round(num * 255)
