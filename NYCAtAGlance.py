@@ -6,6 +6,11 @@ import WeatherWidgets
 import SubwayWidgets
 
 root = Tk()
+root.attributes('-fullscreen', True)
+
+
+emptyMenu = Menu(root)
+root.config(menu=emptyMenu)
 
 clock = Label(root, font=('calibri', 72, 'bold'),
               foreground='black')
