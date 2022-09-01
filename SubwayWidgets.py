@@ -9,7 +9,7 @@ from underground import metadata, SubwayFeed
 from PIL import ImageTk, Image
 from dataclasses import dataclass
 
-os.environ['MTA_API_KEY'] = "th38DAYhJu8cU1j45I2bm4uxnTe4d5hfajVbR6Ty"
+os.environ['MTA_API_KEY'] = "qtbGcSKWDraOMM1uW0qgh9muUYsrd4o01wXv2okD"
 
 
 @ dataclass
@@ -79,7 +79,7 @@ class SubwayWidgets:
         self.organizeSubwayLabels()
 
     def organizeSubwayLabels(self):
-        now = datetime.now() #- timedelta(hours=SubwayWidgets.TIMEZONE_OFFSET)
+        now = datetime.now()  # - timedelta(hours=SubwayWidgets.TIMEZONE_OFFSET)
 
         for i in range(min(len(self.listOfTrains),
                            SubwayWidgets.SUBWAY_DISPLAY_BOXES)):
