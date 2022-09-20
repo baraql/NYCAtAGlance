@@ -8,6 +8,7 @@ from PIL import ImageTk, Image
 import colorsys
 from os.path import exists
 
+
 class WeatherWidget(Frame):
     def __init__(self, parent):
         Frame.__init__(self, parent)
@@ -15,23 +16,14 @@ class WeatherWidget(Frame):
 
         self.uv = Label(self, text="_ UV", anchor="s",
                         font=('calibri', 16, 'bold'),
-                        #    background='black',
                         foreground='black')
         self.uv.pack(side="bottom")
 
         self.temp = Label(self, text="_ F", anchor="center",
                           font=('calibri', 28, 'bold'),
-                          #    background='black',
                           foreground='black')
         self.temp.pack(side="bottom")
 
-        '''
-            self.code = Label(self, text="0000", anchor="center",
-                            font=('calibri', 10, 'bold'),
-                            #  background='black',
-                            foreground='black')
-            self.code.pack(side="bottom")
-            '''
         self.code = ImageTk.PhotoImage(
             WeatherWidgets.getWeatherCodeImage(1000, datetime.now()))
         self.codeLabel = Label(self, image=self.code)
@@ -40,7 +32,6 @@ class WeatherWidget(Frame):
 
         self.time = Label(self, text="0 AM", anchor="center",
                           font=('calibri', 14, 'bold'),
-                          #  background='black',
                           foreground='black')
         self.time.pack(side="bottom")
 
@@ -52,9 +43,6 @@ class WeatherWidget(Frame):
 
         self.time.config(text=time.strftime("%I%p").lstrip('0'))
 
-        # self.code = PhotoImage(
-        # file=getWeatherCodeImageString(code))
-        # print("Changing image code to " + str(self.code))
         self.codeLabel.pack_forget()
         self.code = ImageTk.PhotoImage(
             WeatherWidgets.getWeatherCodeImage(code, time))
@@ -64,8 +52,6 @@ class WeatherWidget(Frame):
 
         self.time.pack_forget()
         self.time.pack(side="bottom")
-
-# parent.create_image(20, 20, self.code)
 
 
 class WeatherWidgets:
@@ -81,22 +67,16 @@ class WeatherWidgets:
     def __init__(self, root):
         self.weatherHours = []
         self.weatherWidgets = []
-        # global secondsUntilUpdateLabels
         self.secondsUntilCheckSubway = 0
         self.weatherFrame = Frame(root)
         self.weatherFrame.pack(side="bottom", fill=X, expand=True)
-        # self.getSun()
         self.getWeather()
         for i in range(WeatherWidgets.WEATHER_DISPLAY_BOXES):
             print("appended " + str(i))
             self.weatherWidgets.append(WeatherWidget(self.weatherFrame))
         self.organizeWeatherLabels()
-        # for hour in weatherHours:
-        #     print(hour.date.strftime("%m/%d, %I:%M:%S") + ": " +
-        #           str(hour.temp) + " " + str(hour.weatherCode))
 
     querystring = {
-        # "location": "40.722718, -73.986623",
         "location": (str(COORDS['latitude']) + ", " + str(COORDS['longitude'])),
         "fields": ["temperatureApparent", "uvIndex", "weatherCode"],
         "units": "imperial",
@@ -117,13 +97,9 @@ class WeatherWidgets:
             "GET", WeatherWidgets.API_URL, params=WeatherWidgets.querystring)
         print(response.text)
 
-        # t = response.json()[
-        # 'data']['timelines'][0]['intervals'][0]['values']['temperatureApparent']
-
         if response.status_code // 100 == 2:
             print(response)
             results = response.json()['data']['timelines'][0]['intervals']
-            # now = datetime.datetime.now() - timedelta(hours=TIMEZONE_OFFSET)
             for daily_result in results:
                 date = datetime.strptime(
                     daily_result['startTime'], '%Y-%m-%dT%H:%M:%S-04:00')
@@ -131,7 +107,6 @@ class WeatherWidgets:
                       str(daily_result['startTime']) +
                       "   extracted date:" +
                       str(date))
-                # temp = round(daily_result['values']['temperatureApparent'])
                 temp = round(daily_result['values']['temperatureApparent'])
 
                 try:
@@ -139,11 +114,6 @@ class WeatherWidgets:
                 except KeyError:
                     uvIndex = -1
                 weatherCode = daily_result['values']['weatherCode']
-                # print(date.day.replace(tzinfo=None) - now)
-                # print("At", date.strftime('%I %p'), ("today" if date.day == 0 else "yesterday" if date.day >
-                #  1 else "tomorrow" if date.day < 0 else "error"), "it will be", temp, "F")
-                # temperatures.append(round(daily_result['values']['temperature']))
-                # uvIndicies.append(daily_result['values']['uvIndex'])
                 self.weatherHours.append(
                     WeatherWidgets.WeatherHour(
                         temp=temp,
@@ -154,13 +124,6 @@ class WeatherWidgets:
             print("Error downloading weather: " + response.status_code)
 
     def isTheSunUp(time):
-        # def getSun(self):
-        #     self.sunrise = sun.getSunriseTime(
-        #         WeatherWidgets.COORDS)['decimal']
-        #     self.sunset = sun.getSunsetTime(
-        #         WeatherWidgets.COORDS)['decimal']
-        # now = (datetime.datetime.now() -
-        #    timedelta(hours=WeatherWidgets.TIMEZONE_OFFSET))
         date = (time.day, time.month, time.year)
         sunrise = 0
         for e in WeatherWidgets.sunrises:
@@ -213,7 +176,6 @@ class WeatherWidgets:
                  30),
                 Image.LANCZOS)
 
-
     def hslToHex(h, s, l):
         r, g, b = [round(num * 255)
                    for num in colorsys.hls_to_rgb(h / 360, l, s)]
@@ -234,12 +196,6 @@ class WeatherWidgets:
     def organizeWeatherLabels(self):
         print("organizeWeatherLabels: " + str(len(self.weatherWidgets)))
         for i in range(WeatherWidgets.WEATHER_DISPLAY_BOXES):
-            # Remove old trains
-            # if (listOfTrains[i].time.replace(tzinfo=None) - now).days < 0:
-            # if weatherHours[i].date.replace(tzinfo=None) < now:
-            #     del weatherHours[i]
-            #     continue
-
             # Update the times on the weatherWidgets
             self.weatherWidgets[i].update(
                 uv=self.weatherHours[i].uvIndex,
@@ -247,5 +203,3 @@ class WeatherWidgets:
                 time=self.weatherHours[i].date,
                 code=self.weatherHours[i].weatherCode)
             self.weatherWidgets[i].pack(side="left")
-        # for i in range(WEATHER_DISPLAY_BOXES - min(len(weatherHours), WEATHER_DISPLAY_BOXES)):
-        #     weatherWidgets[WEATHER_DISPLAY_BOXES-i].pack_forget()
