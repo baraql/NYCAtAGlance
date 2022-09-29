@@ -12,4 +12,5 @@ A display to check in the morning with all the information you'll need for the d
 <p align="center">
   <img src="projectPhoto.JPG" width="350" alt="project photo"></img>
   <img src="projectGif.gif" width="250"/>
+  <img src="noFTrains.JPG" width="350" />
 </p>
