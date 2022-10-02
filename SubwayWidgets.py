@@ -100,10 +100,14 @@ class SubwayWidgets:
     def __init__(self, root):
         self.listOfTrains = []
         self.subwayWidgets = []
+
+        print("range: " + str(range(min(len(self.listOfTrains),
+              SubwayWidgets.SUBWAY_DISPLAY_BOXES))))
         for i in range(min(len(self.listOfTrains), SubwayWidgets.SUBWAY_DISPLAY_BOXES)):
             self.subwayWidgets.append(SubwayWidget(root))
+
         self.checkSubway()
-        self.organizeSubwayLabels()
+        # self.organizeSubwayLabels()
         self.root = root
 
     def organizeSubwayLabels(self):
@@ -119,13 +123,15 @@ class SubwayWidgets:
             for i in range(len(self.subwayWidgets)):
                 if isinstance(self.subwayWidgets[i], NoSubwaysMessageWidget):
                     self.subwayWidgets.pop(i)
+            while len(self.subwayWidgets) < SubwayWidgets.SUBWAY_DISPLAY_BOXES:
+                self.subwayWidgets.append(SubwayWidget(self.root))
 
-        for i in range(min(len(self.listOfTrains),
-                           SubwayWidgets.SUBWAY_DISPLAY_BOXES)):
-            print("line 88... i == " + str(i))
-            if self.listOfTrains[i].time.replace(tzinfo=None) < now:
+        for i in range(len(self.listOfTrains)):
+            while self.listOfTrains[i].time.replace(tzinfo=None) < now:
                 del self.listOfTrains[i]
-                continue
+
+        for i in range(min(len(self.subwayWidgets),
+                           SubwayWidgets.SUBWAY_DISPLAY_BOXES)):
 
             # Update the times on the subwayWidgets
             self.subwayWidgets[i].update(

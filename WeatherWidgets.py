@@ -3,7 +3,7 @@ from tkinter.ttk import *
 from datetime import datetime, timedelta
 from dataclasses import dataclass
 import requests
-from Sun import Sun
+from sun import Sun
 from PIL import ImageTk, Image
 import colorsys
 from os.path import exists
@@ -36,6 +36,7 @@ class WeatherWidget(Frame):
         self.time.pack(side="bottom")
 
     def update(self, uv, temp, time, code):
+        #TODO Fix hue equation
         hue = 255 - ((temp) / 80) * 240
         self.temp.config(
             text=temp, foreground=WeatherWidgets.hslToHex(hue, .7, .5))
