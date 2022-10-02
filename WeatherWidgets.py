@@ -36,7 +36,7 @@ class WeatherWidget(Frame):
         self.time.pack(side="bottom")
 
     def update(self, uv, temp, time, code):
-        #TODO Fix hue equation
+        # TODO Fix hue equation
         hue = 255 - ((temp) / 80) * 240
         self.temp.config(
             text=temp, foreground=WeatherWidgets.hslToHex(hue, .7, .5))

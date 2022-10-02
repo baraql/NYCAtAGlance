@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter.ttk import *
 from time import strftime
 import schedule
-import weatherWidgets
-import subwayWidgets
+import weatherwidgets
+import subwaywidgets
 
 root = Tk()
 root.attributes('-fullscreen', True)
@@ -25,8 +25,8 @@ def time():
     clock.after(1000, time)
 
 
-weather = weatherWidgets.WeatherWidgets(root)
-subways = subwayWidgets.SubwayWidgets(root)
+weather = weatherwidgets.WeatherWidgets(root)
+subways = subwaywidgets.SubwayWidgets(root)
 
 schedule.every(5).seconds.do(subways.organizeSubwayLabels)
 schedule.every(60).seconds.do(subways.checkSubway)
