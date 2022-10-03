@@ -6,7 +6,10 @@ import requests
 from sun import Sun
 from PIL import ImageTk, Image
 import colorsys
+import os
 from os.path import exists
+
+dirname = os.path.dirname(__file__)
 
 
 class WeatherWidget(Frame):
@@ -161,18 +164,18 @@ class WeatherWidgets:
 
     def getWeatherCodeImage(code, time):
         if not WeatherWidgets.isTheSunUp(time) and exists("assets/weather/" + str(code) + "1.png"):
-            return Image.open(
-                ("assets/weather/" +
-                 str(code) +
-                 "1.png")).resize(
+            return Image.open(os.path.join(dirname,
+                                           ("./assets/weather/" +
+                                            str(code) +
+                                               "1.png"))).resize(
                 (30,
                  30),
                 Image.LANCZOS)
         else:
-            return Image.open(
-                ("assets/weather/" +
-                 str(code) +
-                 "0.png")).resize(
+            return Image.open(os.path.join(dirname,
+                                           ("./assets/weather/" +
+                                            str(code) +
+                                               "0.png"))).resize(
                 (30,
                  30),
                 Image.LANCZOS)

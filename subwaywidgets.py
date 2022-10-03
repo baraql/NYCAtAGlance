@@ -10,6 +10,8 @@ from underground import metadata, SubwayFeed
 from PIL import ImageTk, Image
 from dataclasses import dataclass
 
+dirname = os.path.dirname(__file__)
+
 os.environ['MTA_API_KEY'] = "qtbGcSKWDraOMM1uW0qgh9muUYsrd4o01wXv2okD"
 
 
@@ -28,9 +30,10 @@ class SubwayWidget(Frame):
 
         self.icon = ImageTk.PhotoImage(
             Image.open(
-                ("assets/subway/" +
-                 "ftrain" +
-                 ".png")).resize(
+                os.path.join(dirname, ("./assets/subway/" +
+                                       "ftrain" +
+                                       ".png"))
+            ).resize(
                 (35,
                  35),
                 Image.LANCZOS)
@@ -65,8 +68,8 @@ class NoSubwaysMessageWidget(Frame):
         Frame.pack(self, side="bottom", fill=X, expand=True)
 
         self.icon = ImageTk.PhotoImage(
-            Image.open(
-                "assets/subway/erroricon.png").resize(
+            Image.open(os.path.join(dirname,
+                                    "./assets/subway/erroricon.png")).resize(
                 (35,
                  35),
                 Image.LANCZOS)
