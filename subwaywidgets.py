@@ -129,9 +129,12 @@ class SubwayWidgets:
             while len(self.subwayWidgets) < SubwayWidgets.SUBWAY_DISPLAY_BOXES:
                 self.subwayWidgets.append(SubwayWidget(self.root))
 
-        for i in range(len(self.listOfTrains)):
-            while self.listOfTrains[i].time.replace(tzinfo=None) < now:
+        i = 0
+        while i < len(self.listOfTrains):
+            if self.listOfTrains[i].time.replace(tzinfo=None) < now:
                 del self.listOfTrains[i]
+                i -= 1
+            i += 1
 
         for i in range(min(len(self.subwayWidgets),
                            SubwayWidgets.SUBWAY_DISPLAY_BOXES)):
