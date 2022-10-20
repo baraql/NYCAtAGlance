@@ -1,10 +1,9 @@
 # TODO: A/C trains on weekends
 
-from operator import contains
 import os
 from tkinter import *
 from tkinter.ttk import *
-from datetime import datetime, timedelta
+from datetime import datetime
 import string
 from underground import metadata, SubwayFeed
 from PIL import ImageTk, Image

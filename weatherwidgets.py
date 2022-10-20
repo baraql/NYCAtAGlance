@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.ttk import *
-from datetime import datetime, timedelta
+from datetime import datetime
 from dataclasses import dataclass
 import requests
 from sun import Sun
