@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 dirname = os.path.dirname(__file__)
 
-os.environ['MTA_API_KEY'] = "qtbGcSKWDraOMM1uW0qgh9muUYsrd4o01wXv2okD"
+os.environ['MTA_API_KEY'] = "vR8wdBZ65a4R3qKCVo8SR3xKWapPxbOC56N9jq5C"
 
 
 @ dataclass
